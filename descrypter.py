@@ -1,20 +1,22 @@
 from cryptography.fernet import Fernet
 import os
 
-key = input("Enter the encryption key:")
 
-cipher = Fernet(key)
+def descrypt_file():
+    key = input("Enter the decryption key:")
 
-arquivo_selecionado = input("Enter the path of the file to decrypt: ")
+    cipher = Fernet(key)
 
-with open(arquivo_selecionado, "rb") as arquivo:
-    conteudo = arquivo.read()
-    arquivo.close()
+    arquivo_selecionado = input("Enter the path of the file to decrypt: ")
 
-conteudo_decriptado = cipher.decrypt(conteudo)
+    with open(arquivo_selecionado, "rb") as arquivo:
+        conteudo = arquivo.read()
+        arquivo.close()
 
-os.remove(arquivo_selecionado)
+    conteudo_decriptado = cipher.decrypt(conteudo)
 
-with open(arquivo_selecionado.replace(".encrypted", ""), "wb") as arquivo_decriptado:
-    arquivo_decriptado.write(conteudo_decriptado)
-    arquivo_decriptado.close()
+    os.remove(arquivo_selecionado)
+
+    with open(arquivo_selecionado.replace(".encrypted", ""), "wb") as arquivo_decriptado:
+        arquivo_decriptado.write(conteudo_decriptado)
+        arquivo_decriptado.close()
